@@ -40,7 +40,8 @@ main()
 .catch(err => {
     console.log(err)
 });
-
+console.log("DB NAME:", mongoose.connection.name);
+console.log("DB URL:", process.env.MONGO_URL);
 async function main() {
 //   await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
      await mongoose.connect(dbUrl);
