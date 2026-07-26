@@ -103,14 +103,18 @@ app.use((req,res,next) => {
 //     let registeredUser = await User.register(fakeUser,"helloworld");
 //     console.log(registeredUser);
 // })
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
+
 app.use("/",users);
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
 
 
-app.get("/", (req, res) => {
-    res.redirect("/listings");
-});
+
 
 app.use((err,req,res,next) => {
     let {status = 404,message = "something went wrong!"} = err;
@@ -120,6 +124,9 @@ app.use((err,req,res,next) => {
 app.use((req, res) => {
     res.status(404).render("listings/error.ejs");
 });
-app.listen(8080,() => {
-    console.log("server is listening on port : 8080");
-})
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
